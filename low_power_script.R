@@ -2,7 +2,7 @@ library("poweRlaw")
 setwd("~/Desktop")
 
 #read data from csv that has one column with frequency
-data1 <- read.csv("file.tsv")
+data1 <- read.csv("Frequency_comments.tsv")
 #extract data from the column to vector
 data2 <- data1[[1]]
 
@@ -13,7 +13,10 @@ est = estimate_xmin(d)
 d$setXmin(est)
 
 #show a log-log plot of the data
-plot1 = plot(d, xlab="Numero di commenti", ylab="Numero di utenti")
+#On the x axis there are values of comments
+#On the y axis there are CDF (Cumulative Distribution Function), that represents 
+#the probability that the random variable X takes on a value less than or equal to x
+plot1 = plot(d, xlab="Numero di commenti", ylab="CDF")
 #Add in the fitted distribution
 lines(d, col=2)
 
