@@ -1,0 +1,10 @@
+fx <- table(data2)
+i <- as.numeric(names(fx))
+y <- rep(0,max(i))
+y[i] <- fx
+m0 <- glm(y~log(1:max(i)), family=quasipoisson())
+print(summary(m0))
+sub <- paste("s=",round(m0$coef[2],2),"lambda=",sum(data2),"/",length(data2))
+plot(i,fx,log="xy",xlab="Number of comments",sub=sub,ylab="Number of users")
+grid()
+lines(1:max(i),(fitted(m0)), type="b")
