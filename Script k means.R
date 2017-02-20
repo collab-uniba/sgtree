@@ -1,7 +1,7 @@
-
-mydata <- read.csv("commenti inviati.tsv")
+mydata <- read.csv("acoustic sent comments.tsv")
+#mydata <- read.csv("acoustic indegree.tsv")
 # K-Means Cluster Analysis
-fit <- kmeans(mydata, 18) # 5 cluster solution
+fit <- kmeans(mydata, 10) # 5 cluster solution
 
 # get cluster means 
 #aggregate(mydata,by=list(fit$cluster),FUN=mean)
@@ -26,4 +26,6 @@ X[length(classes)-1]=classes[length(classes)]
 
 #X = X[-1]
 dataf = data.frame(x=X, y=as.vector(t))
-plot(dataf, log="xy", xlab="Commenti inviati", ylab="Numero di utenti")
+#plot(dataf, log="xy", xlab="In Degree", ylab="Number of Users")
+#plot(dataf, log="xy", xlab="Number of received Comments", ylab="Number of Users")
+plot(dataf, log="xy", xlab="Number of sent Comments", ylab="Number of Users")
