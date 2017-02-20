@@ -1,3 +1,4 @@
+data2 <- read.csv("commenti inviati.tsv")
 fx <- table(data2)
 i <- as.numeric(names(fx))
 y <- rep(0,max(i))
