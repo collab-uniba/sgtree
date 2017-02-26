@@ -9,7 +9,7 @@ spearman <- function(dir, name) {
 	#calcolo indice di pearson
 	sub = paste("Spearman's correlation = ", cor(data, method="spearman"))
 
-	plot(data$weighted.outdegree, data$indegree, log="xy", xlab="Sent Comments", ylab="In degree", sub=sub[2])
+	plot(data$weighted.outdegree, data$indegree, log="xy", xlab="Comments Sent", ylab="In degree", sub=sub[2])
 	par(mar=c(1,1,1,1))
 	quartz.save(file=paste("COR ", name, " correlazione.png", sep=""), dpi=1024)
 	dev.off()
