@@ -29,25 +29,41 @@ quantilePlot <- function(dir, name, type) {
 	#X = X[-1]
 	dataf = data.frame(x=X, y=as.vector(t))
 
+	par(bg="white")
 	types = c("indegree", "outdegree", "received comments", "sent comments")
 	if (identical(type, types[1])) {
-		plot(dataf, log="xy", xlab="In Degree", ylab="Number of Users")
+		plot(dataf, log="xy", xlab="In Degree", ylab="Number of Users", bg="white")
 	} else if (identical(type, types[2])) {
-		plot(dataf, log="xy", xlab="Out Degree", ylab="Number of Users")
+		plot(dataf, log="xy", xlab="Out Degree", ylab="Number of Users", bg="white")
 	} else if (identical(type, types[3])) {
-		plot(dataf, log="xy", xlab="Number of received Comments", ylab="Number of Users")
+		plot(dataf, log="xy", xlab="Number of received Comments", ylab="Number of Users", bg="white")
 	} else {
-		plot(dataf, log="xy", xlab="Number of sent Comments", ylab="Number of Users")
+		plot(dataf, log="xy", xlab="Number of sent Comments", ylab="Number of Users", bg="white")
 	}
 
 	par(mar=c(1,1,1,1))
-	quartz.save(file=paste("QQ ", name, " ", type, ".png", sep=""), dpi=720)
+	quartz.save(file=paste("png/", "QQ ", name, " ", type, ".png", sep=""), dpi=720)
 	dev.off()
 }
 
-directories = c("Complessivi/", "Generi/Acoustic/", "Generi/Alternative/", "Generi/Electronic/", "Generi/Hip Hop/", "Generi/Pop/", "Generi/Rock/")
-names = c("generale", "acoustic", "alternative", "electronic", "hh", "pop", "rock")
-types = c("indegree", "outdegree", "received comments", "sent comments")
+directories = c("Complessivi/", 
+	"Generi/Acoustic/", 
+	"Generi/Alternative/", 
+	"Generi/Electronic/", 
+	"Generi/Hip Hop/", 
+	"Generi/Pop/", 
+	"Generi/Rock/")
+names = c("generale", 
+	"acoustic", 
+	"alternative", 
+	"electronic", 
+	"hh", 
+	"pop", 
+	"rock")
+types = c("indegree", 
+	"outdegree", 
+	"received comments", 
+	"sent comments")
 
 for(j in 1:length(directories)) {
 	for(i in 1:length(types)) {

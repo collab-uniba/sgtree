@@ -9,14 +9,27 @@ spearman <- function(dir, name) {
 	#calcolo indice di pearson
 	sub = paste("Spearman's correlation = ", cor(data, method="spearman"))
 
-	plot(data$weighted.outdegree, data$indegree, log="xy", xlab="Comments Sent", ylab="In degree", sub=sub[2])
+	par(bg="white")
+	plot(data$weighted.outdegree, data$indegree, log="xy", xlab="Comments Sent", ylab="In degree", sub=sub[2], bg="white")
 	par(mar=c(1,1,1,1))
-	quartz.save(file=paste("COR ", name, " correlazione.png", sep=""), dpi=1024)
+	quartz.save(file=paste("png/","COR ", name, " correlazione.png", sep=""), dpi=1024)
 	dev.off()
 }
 
-directories = c("Complessivi/", "Generi/Acoustic/", "Generi/Alternative/", "Generi/Electronic/", "Generi/Hip Hop/", "Generi/Pop/", "Generi/Rock/")
-names = c("generale", "acoustic", "alternative", "electronic", "hh", "pop", "rock")
+directories = c("Complessivi/", 
+	"Generi/Acoustic/", 
+	"Generi/Alternative/", 
+	"Generi/Electronic/", 
+	"Generi/Hip Hop/", 
+	"Generi/Pop/", 
+	"Generi/Rock/")
+names = c("generale", 
+	"acoustic", 
+	"alternative", 
+	"electronic", 
+	"hh", 
+	"pop", 
+	"rock")
 
 for(i in 1: length(directories)) {
 	spearman(paste("~/Dropbox (Università)/Cartella del team Università/Risultati/", directories[i], sep=""), names[i])
