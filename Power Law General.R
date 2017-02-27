@@ -1,4 +1,4 @@
-pl <- function(dir, csv, xlab, ylab, outfilename) {}
+pl <- function(dir, csv, xlab, ylab, outfile) {
 	library("poweRlaw")
 	setwd(dir)
 
@@ -13,11 +13,12 @@ pl <- function(dir, csv, xlab, ylab, outfilename) {}
 	est = estimate_xmin(d)
 	d$setXmin(est)
 
+	par(bg="white")
 	#show a log-log plot of the data
 	#On the x axis there are values of comments
 	#On the y axis there are CDF (Cumulative Distribution Function), that represents 
 	#the probability that the random variable X takes on a value less than or equal to x
-	plot(d, xlab=xlab, ylab=ylab)
+	plot(d, xlab=xlab, ylab=ylab, bg="white")
 	#Add in the fitted distribution
 	lines(d, col=2)
 
@@ -27,3 +28,5 @@ pl <- function(dir, csv, xlab, ylab, outfilename) {}
 	quartz.save(file=outfile, dpi=720)
 	dev.off()
 }
+
+pl("~/Dropbox (Università)/Cartella del team Università/Risultati/Complessivi/", "generale degree.tsv", "Degree", "CDF (Cumulative Distribution Function)", "png/PL generale degree.png")
