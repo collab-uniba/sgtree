@@ -3,7 +3,7 @@ loglogPlot <- function(dir, name, type) {
 	setwd(dir)
 
 	#read data from csv that has one column with frequency
-	data1 <- read.csv(paste(name, " ", type, ".tsv", sep=""))
+	data1 <- read.csv(paste("CSV/", name, " ", type, ".tsv", sep=""))
 	#extract data from the column to vector
 	data2 <- data1[[1]]
 
@@ -33,11 +33,11 @@ loglogPlot <- function(dir, name, type) {
 	
 	#print data
 	par(mar=c(1,1,1,1))
-	quartz.save(file=paste("png/", "PL ", name, " ", type, ".png", sep=""), dpi=720)
+	quartz.save(file=paste("PL ", name, " ", type, ".png", sep=""), dpi=720)
 	dev.off()
 }
 
-directories = c("Complessivi/", 
+directories = c("Generale/", 
 	"Generi/Acoustic/", 
 	"Generi/Alternative/", 
 	"Generi/Electronic/", 
@@ -58,6 +58,6 @@ types = c("indegree",
 
 for(j in 1:length(directories)) {
 	for(i in 1:length(types)) {
-		loglogPlot(paste("~/Dropbox (Università)/Cartella del team Università/Risultati/", directories[j], sep=""), names[j], types[i])
+		loglogPlot(paste("~/Dropbox (Università)/Cartella del team Università/Risultati/2. Power law", directories[j], sep=""), names[j], types[i])
 	}
 }
