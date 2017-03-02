@@ -11,7 +11,7 @@ import java.util.Properties;
 public class Main2 {
 
     private static final String DB_PROPERTIES = "config/DBConnection.properties";
-    private static final String QUERY_PROPERTIES = "config/Query.properties";
+    private static final String QUERY_PROPERTIES = "config/Query_not_normalized.properties";
     private Connection connection = null;
     private final Properties dbProperties;
     private static Properties queryProperties;
@@ -109,6 +109,7 @@ public class Main2 {
         try {
             rs.next();
 
+            //1° column tree_id, 2° authorId, 3° num_songs the author has written in the tree
             temp = new Tree2(rs.getInt(1));
             temp.addAuthor(rs.getInt(2), rs.getInt(3));
             trees.add(temp);
@@ -146,7 +147,7 @@ public class Main2 {
 
     private void saveToFile() {
         try {
-            File fout = new File("Archi OverdubNet 1 (with weight collaborations).tsv");
+            File fout = new File("Archi OverdubNet 1 (with weight collaborations and no remix).tsv");
             FileOutputStream fos = new FileOutputStream(fout);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
 
@@ -216,14 +217,12 @@ public class Main2 {
 
         main2.openConnection();
 
-        /*rs = main2.executeQuery("SELECT tree_id, memberId, count(*) as num_songs FROM songs WHERE tree_id IS NOT NULL GROUP BY tree_id, memberId");
-
-
+        rs = main2.executeQuery("SELECT tree_id, memberId, count(*) AS num_songs FROM songs WHERE tree_id IS NOT NULL AND isremix = 0 GROUP BY tree_id, memberId");
         main2.buildTrees(rs);
         main2.printTrees();
-        main2.saveToFile();*/
+        main2.saveToFile();
 
-        String[] s = {"GENERALE 1 Corr Songs - New Songs.tsv",
+        /*String[] s = {"GENERALE 1 Corr Songs - New Songs.tsv",
                 "GENERALE 2 Corr Songs - Overdubs.tsv",
                 "GENERALE 3 Corr Songs - In Degree.tsv",
                 "GENERALE 4 Corr Songs - Out Degree.tsv",
@@ -286,7 +285,7 @@ public class Main2 {
 
         for(int i = 1; i<=60; i++) {
             main2.executeQueryAndSave(queryProperties.getProperty(String.valueOf(i)), s[i-1]);
-        }
+        }*/
 
         main2.closeConnection();
 

@@ -1,6 +1,6 @@
 meanMinMax <- function (dir, csv, last) {
 	setwd(dir)
-	data = read.csv(paste("CSV/", csv, ".tsv", sep="") , header=TRUE, sep="\t")
+	data = read.csv(paste("CSV/Valori normalizzati in base al numero di autori, betweenness normalizzata/", csv, ".tsv", sep="") , header=TRUE, sep="\t")
 
 	#trova righe dove ci sono zeri e le elimina
 	#row_sub = apply(data, 1, function(row) all(row !=0))
