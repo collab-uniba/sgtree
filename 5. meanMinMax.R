@@ -1,7 +1,8 @@
 meanMinMax <- function (dir, csv, last) {
 	setwd(dir)
-	data = read.csv(paste("CSV/Valori normalizzati in base al numero di autori, betweenness normalizzata/", csv, ".tsv", sep="") , header=TRUE, sep="\t")
-
+	#data = read.csv(paste("CSV/UNDIRECTED Valori normalizzati in base al numero di autori/", csv, ".tsv", sep="") , header=TRUE, sep="\t")
+	data = read.csv(paste("CSV/", csv, ".tsv", sep="") , header=TRUE, sep="\t")
+	
 	#trova righe dove ci sono zeri e le elimina
 	#row_sub = apply(data, 1, function(row) all(row !=0))
 	#data = data[row_sub,]
@@ -34,21 +35,26 @@ files = c("1 Corr Songs - New Songs",
 		"13 Corr In Degree - Out Degree",
 		"15 Corr Out Degree - Betweenness")
 
+
 for(i in 1:length(files)) {
-	if(i != length(files)) {
-		meanMinMax("~/Dropbox (Università)/Cartella del team Università/Risultati/7. Cross correlation table/Generale/", paste("GENERALE", files[i]), FALSE)
-	} else {
-		meanMinMax("~/Dropbox (Università)/Cartella del team Università/Risultati/7. Cross correlation table/Generale/", paste("GENERALE", files[i]), TRUE)
-	}
+  if(i != length(files)) {
+    #meanMinMax("~/Dropbox (Università)/Risultati/7. Cross correlation table/Generale/", paste("GENERALE", files[i]), FALSE)
+		meanMinMax("~/PycharmProjects/scripts/CROSSCORRELATION/Generale/", paste("GENERALE", files[i]), FALSE)
+  } else {
+    #meanMinMax("~/Dropbox (Università)/Risultati/7. Cross correlation table/Generale/", paste("GENERALE", files[i]), TRUE)
+    meanMinMax("~/PycharmProjects/scripts/CROSSCORRELATION/Generale/", paste("GENERALE", files[i]), TRUE)
+  }
 }
 
 types=c("ROCK", "HIPHOP", "ACOUSTIC")
 for(j in 1:length(types)) {
-	for(i in 1: length(files)) {
-		if(i != length(files)) {
-			meanMinMax("~/Dropbox (Università)/Cartella del team Università/Risultati/7. Cross correlation table/Generi/", paste(types[j], files[i]), FALSE)
-		} else {
-			meanMinMax("~/Dropbox (Università)/Cartella del team Università/Risultati/7. Cross correlation table/Generi/", paste(types[j], files[i]), TRUE)
-		}
-	}
+  for(i in 1: length(files)) {
+    if(i != length(files)) {
+      #meanMinMax("~/Dropbox (Università)/Risultati/7. Cross correlation table/Generi/", paste(types[j], files[i]), FALSE)
+      meanMinMax("~/PycharmProjects/scripts/CROSSCORRELATION/Generi/", paste(types[j], files[i]), FALSE)
+    } else {
+      #meanMinMax("~/Dropbox (Università)/Risultati/7. Cross correlation table/Generi/", paste(types[j], files[i]), TRUE)
+      meanMinMax("~/PycharmProjects/scripts/CROSSCORRELATION/Generi/", paste(types[j], files[i]), TRUE)
+    }
+  }
 }

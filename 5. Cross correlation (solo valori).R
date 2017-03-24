@@ -32,4 +32,5 @@ activityCorrelationTable <- function(dir) {
 	}
 }
 
-activityCorrelationTable("~/Dropbox (Università)/Cartella del team Università/Risultati/7. Cross correlation table/")
+#activityCorrelationTable("~/Dropbox (Università)/Risultati/7. Cross correlation table/")
+activityCorrelationTable("~/PycharmProjects/scripts/CROSSCORRELATION/")
