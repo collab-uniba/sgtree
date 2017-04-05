@@ -8,7 +8,6 @@ public class Tree {
     int id;
     ArrayList<Integer> authors;
 
-
     Tree(int id) {
         this.id = id;
         authors = new ArrayList<>();
