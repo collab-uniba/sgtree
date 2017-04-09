@@ -94,18 +94,18 @@ public class Main {
 
     private void saveToFile() {
         try {
-            File fout = new File("Archi OverdubNet 1.tsv");
+            File fout = new File("Archi CollaborationNet.tsv");
             FileOutputStream fos = new FileOutputStream(fout);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
 
-            int size;
+            int numAuthors;
             bw.write("source\ttarget\ttype");
             bw.newLine();
             for (Tree t : trees) {
-                size = t.authors.size();
-                if (size != 1) {
-                    for (int i = 0; i < size; i++) {
-                        for (int j = i + 1; j < size; j++) {
+                numAuthors = t.authors.size();
+                if (numAuthors != 1) {
+                    for (int i = 0; i < numAuthors; i++) {
+                        for (int j = i + 1; j < numAuthors; j++) {
                             bw.write(t.authors.get(i) + "\t" + t.authors.get(j) + "\t" + "Undirected");
                             bw.newLine();
                         }
@@ -153,7 +153,7 @@ public class Main {
         ResultSet rs;
 
         main.openConnection();
-        rs = main.executeQuery("SELECT tree_id, memberId FROM songs WHERE tree_id IS NOT NULL GROUP BY tree_id, memberId");
+        rs = main.executeQuery("SELECT tree_id, memberId FROM songs WHERE tree_id IS NOT NULL AND isremix = 0 GROUP BY tree_id, memberId");
 
         main.buildTrees(rs);
         main.printTrees();
