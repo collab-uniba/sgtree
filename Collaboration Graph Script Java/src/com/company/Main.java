@@ -155,10 +155,18 @@ public class Main {
         main.openConnection();
         rs = main.executeQuery("SELECT tree_id, memberId FROM songs WHERE tree_id IS NOT NULL AND isremix = 0 GROUP BY tree_id, memberId");
 
+        //PER GENERI
+        //rs = main.executeQuery("SELECT DISTINCT tree_id, memberid FROM songs WHERE isremix = 0 AND tree_id IN (SELECT tree_id FROM rock_blues_trees)");
+        //rs = main.executeQuery("SELECT DISTINCT tree_id, memberid FROM songs WHERE isremix = 0 AND tree_id IN (SELECT tree_id FROM hiphop_rnb_trees)");
+        //rs = main.executeQuery("SELECT DISTINCT tree_id, memberid FROM songs WHERE isremix = 0 AND tree_id IN (SELECT tree_id FROM alternative_electronic_trees)");
+        //rs = main.executeQuery("SELECT DISTINCT tree_id, memberid FROM songs WHERE isremix = 0 AND tree_id IN (SELECT tree_id FROM jazz_classical_trees)");
+
         main.buildTrees(rs);
         main.printTrees();
         main.saveToFile();
 
         main.closeConnection();
+
+
     }
 }

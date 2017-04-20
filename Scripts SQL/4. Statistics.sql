@@ -3,9 +3,13 @@
 #######################################################################################################################
 
 ############################################################################
-#####################   ENTITA' MODELLO CONCETTUALE   ######################
+##############################   GENERALE   ################################
 ############################################################################
 
+############################################################################
+#####################   ENTITA' MODELLO CONCETTUALE   ######################
+
+#SONGS
 SELECT count(*)
 FROM songs;
 
@@ -43,6 +47,19 @@ WHERE id NOT IN (SELECT DISTINCT memberId AS id
                  UNION SELECT id
                        FROM commenters_non_authors);
 
+#utenti che hanno commentato canzoni di altri
+SELECT count(DISTINCT senderid)
+FROM songs
+  INNER JOIN songtree_messages ON songs.id = songtree_messages.songid
+WHERE kind = 0 AND memberId != senderid;
+
+SELECT count(DISTINCT memberid)
+FROM songs
+WHERE memberId NOT IN (SELECT DISTINCT senderid
+                   FROM songs
+                     INNER JOIN songtree_messages ON songs.id = songtree_messages.songid
+                   WHERE kind = 0 AND senderid != songs.memberId);
+
 #Coloro che hanno effettuato qualche attività nella comunity. Le attività comprendono: scrittura, invio di messaggi,
 #bookmark, ascolto di canzoni, repost, following, like, direct messages.
 SELECT DISTINCT memberId AS id
@@ -65,3 +82,204 @@ UNION SELECT DISTINCT memberId AS id
 UNION SELECT DISTINCT senderid AS id
       FROM songtree_messages
       WHERE kind = 1;
+
+############################################################################
+####################   RELAZIONI MODELLO CONCETTUALE   #####################
+
+SELECT count(*)
+FROM songtree_messages
+WHERE kind = 0;
+
+SELECT count(*)
+FROM repost;
+
+SELECT count(*)
+FROM songsRatings
+WHERE rating >= 2.5;
+
+SELECT count(*)
+FROM songtree_favorites;
+
+############################################################################
+############################   MACRO GENERI   ##############################
+############################################################################
+
+######################################################
+##################   ROCK E BLUES   ##################
+
+#SONGS
+SELECT count(*)
+FROM songs
+WHERE (genre = 'Rock'
+       OR genre = 'Religious'
+       OR genre = 'Country'
+       OR genre = 'Reggae'
+       OR genre = 'Gospel'
+       OR genre = 'Punk'
+       OR genre = 'Heavy Metal'
+       OR genre = 'Folk'
+       OR genre = 'Pop'
+       OR genre = 'Blues');
+
+#NEW SONGS
+SELECT count(*)
+FROM songs
+WHERE parentid = 0 AND (genre = 'Rock'
+                        OR genre = 'Religious'
+                        OR genre = 'Country'
+                        OR genre = 'Reggae'
+                        OR genre = 'Gospel'
+                        OR genre = 'Punk'
+                        OR genre = 'Heavy Metal'
+                        OR genre = 'Folk'
+                        OR genre = 'Pop'
+                        OR genre = 'Blues');
+
+#OVERDUB
+SELECT count(*)
+FROM songs
+WHERE parentid != 0 AND (genre = 'Rock'
+                         OR genre = 'Religious'
+                         OR genre = 'Country'
+                         OR genre = 'Reggae'
+                         OR genre = 'Gospel'
+                         OR genre = 'Punk'
+                         OR genre = 'Heavy Metal'
+                         OR genre = 'Folk'
+                         OR genre = 'Pop'
+                         OR genre = 'Blues');
+
+#COMMENTI
+SELECT count(*)
+FROM songs
+  INNER JOIN songtree_messages ON songs.id = songtree_messages.songid
+WHERE kind = 0 AND (genre = 'Rock'
+                    OR genre = 'Religious'
+                    OR genre = 'Country'
+                    OR genre = 'Reggae'
+                    OR genre = 'Gospel'
+                    OR genre = 'Punk'
+                    OR genre = 'Heavy Metal'
+                    OR genre = 'Folk'
+                    OR genre = 'Pop'
+                    OR genre = 'Blues');
+
+######################################################
+##################   HIP HOP E R&B   #################
+
+#SONGS
+SELECT count(*)
+FROM songs
+WHERE (genre = 'Hip Hop'
+       OR genre = 'Rap'
+       OR genre = 'Dance'
+       OR genre = 'R&B'
+       OR genre = 'Soul'
+       OR genre = 'Funky');
+
+#NEW SONGS
+SELECT count(*)
+FROM songs
+WHERE parentid = 0 AND (genre = 'Hip Hop'
+                        OR genre = 'Rap'
+                        OR genre = 'Dance'
+                        OR genre = 'R&B'
+                        OR genre = 'Soul'
+                        OR genre = 'Funky');
+
+#OVERDUB
+SELECT count(*)
+FROM songs
+WHERE parentid != 0 AND (genre = 'Hip Hop'
+                         OR genre = 'Rap'
+                         OR genre = 'Dance'
+                         OR genre = 'R&B'
+                         OR genre = 'Soul'
+                         OR genre = 'Funky');
+
+#COMMENTI
+SELECT count(*)
+FROM songs
+  INNER JOIN songtree_messages ON songs.id = songtree_messages.songid
+WHERE kind = 0 AND (genre = 'Hip Hop'
+                    OR genre = 'Rap'
+                    OR genre = 'Dance'
+                    OR genre = 'R&B'
+                    OR genre = 'Soul'
+                    OR genre = 'Funky');
+
+##############################################################
+################   ALTERNATIVE E ELECTRONIC   ################
+
+#SONGS
+SELECT count(*)
+FROM songs
+WHERE (genre = 'Alternative'
+       OR genre = 'Indie'
+       OR genre = 'Electronic'
+       OR genre = 'Acoustic');
+
+#NEW SONGS
+SELECT count(*)
+FROM songs
+WHERE parentid = 0 AND (genre = 'Alternative'
+                        OR genre = 'Indie'
+                        OR genre = 'Electronic'
+                        OR genre = 'Acoustic');
+
+#OVERDUB
+SELECT count(*)
+FROM songs
+WHERE parentid != 0 AND (genre = 'Alternative'
+                         OR genre = 'Indie'
+                         OR genre = 'Electronic'
+                         OR genre = 'Acoustic');
+
+#COMMENTI
+SELECT count(*)
+FROM songs
+  INNER JOIN songtree_messages ON songs.id = songtree_messages.songid
+WHERE kind = 0 AND (genre = 'Alternative'
+                    OR genre = 'Indie'
+                    OR genre = 'Electronic'
+                    OR genre = 'Acoustic');
+
+##########################################################
+##################   JAZZ E CLASSICAL   ##################
+
+#SONGS
+SELECT count(*)
+FROM songs
+WHERE (genre = 'Ambient'
+       OR genre = 'Jazz'
+       OR genre = 'Fusion'
+       OR genre = 'Classical'
+       OR genre = 'Soundtrack');
+
+#NEW SONGS
+SELECT count(*)
+FROM songs
+WHERE parentid = 0 AND (genre = 'Ambient'
+                        OR genre = 'Jazz'
+                        OR genre = 'Fusion'
+                        OR genre = 'Classical'
+                        OR genre = 'Soundtrack');
+
+#OVERDUB
+SELECT count(*)
+FROM songs
+WHERE parentid != 0 AND (genre = 'Ambient'
+                         OR genre = 'Jazz'
+                         OR genre = 'Fusion'
+                         OR genre = 'Classical'
+                         OR genre = 'Soundtrack');
+
+#COMMENTI
+SELECT count(*)
+FROM songs
+  INNER JOIN songtree_messages ON songs.id = songtree_messages.songid
+WHERE kind = 0 AND (genre = 'Ambient'
+                    OR genre = 'Jazz'
+                    OR genre = 'Fusion'
+                    OR genre = 'Classical'
+                    OR genre = 'Soundtrack');

@@ -68,7 +68,7 @@ filenames = c("Feedback graph 2 (all authors) [Nodes].csv",
               "Feedback graph MacroGeneri 2 - RockBlues [Nodes].csv")
 
 for(i in 1:length(directories)) {
-  dir = paste("~/Dropbox (Personale)/Songtree/2. Degree distribution/", directories[i], sep="")
+  dir = paste("~/Dropbox (Personale)/Songtree/2. Degree distribution/1. Feedback Graph/", directories[i], sep="")
   file = filenames[i]
   quantilePlot(dir, file, genres[i])
 }

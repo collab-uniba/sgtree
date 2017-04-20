@@ -9,6 +9,7 @@ data$rank <- seq.int(nrow(data))
 #seleziona solo id e rank (riferito ai follower)
 rank_followers = data[ ,c("id", "rank")]
 
+#########################################################################################
 #FEEDBACK GRAPH
 data = read.csv("CSV/Feedback graph - TOP USERS [Nodes].tsv", sep='\t')
 top_users = data[, c("id", "label", "indegree")]
@@ -64,6 +65,7 @@ top_users = merge(top_users, rank_followers, by = "id")
 top_users = top_users[order(-top_users$outdegree), ]
 write.csv2(top_users, file = "Feedback graph ROCK BLUES (outdegree).csv", row.names = F)
 
+#########################################################################################
 #COLLABORATION GRAPH
 data = read.csv("CSV/Collaboration graph - TOP USERS [Nodes].tsv", sep='\t')
 top_users = data[, c("id", "label", "degree")]
@@ -71,6 +73,36 @@ top_users = merge(top_users, rank_followers, by = "id")
 top_users = top_users[order(-top_users$degree), ]
 write.csv2(top_users, file = "Collaboration graph (degree).csv", row.names = F)
 
+#ALTERNATIVE E ELECTRONIC
+data = read.csv("CSV/Collaboration Graph Macro Generi - Alternative Electronic - TOP USERS.tsv", sep='\t')
+top_users = data[, c("id", "label", "degree")]
+top_users = merge(top_users, rank_followers, by = "id")
+top_users = top_users[order(-top_users$degree), ]
+write.csv2(top_users, file = "Collaboration graph ALTERNATIVE ELECTRONIC (degree).csv", row.names = F)
+
+#HIP HOP E R&B
+data = read.csv("CSV/Collaboration Graph Macro Generi - HipHopRnB - TOP USERS.tsv", sep='\t')
+top_users = data[, c("id", "label", "degree")]
+top_users = merge(top_users, rank_followers, by = "id")
+top_users = top_users[order(-top_users$degree), ]
+write.csv2(top_users, file = "Collaboration graph HIPHOP R&B (degree).csv", row.names = F)
+
+#JAZZ E CLASSICAL
+data = read.csv("CSV/Collaboration Graph Macro Generi - JazzClassical - TOP USERS.tsv", sep='\t')
+top_users = data[, c("id", "label", "degree")]
+top_users = merge(top_users, rank_followers, by = "id")
+top_users = top_users[order(-top_users$degree), ]
+write.csv2(top_users, file = "Collaboration graph JAZZ CLASSICAL (degree).csv", row.names = F)
+
+#ROCK E BLUES
+data = read.csv("CSV/Collaboration Graph Macro Generi - RockBlues - TOP USERS.tsv", sep='\t')
+top_users = data[, c("id", "label", "degree")]
+top_users = merge(top_users, rank_followers, by = "id")
+top_users = top_users[order(-top_users$degree), ]
+write.csv2(top_users, file = "Collaboration graph ROCK BLUES (degree).csv", row.names = F)
+
+
+#########################################################################################
 #OVERDUB GRAPH
 data = read.csv("CSV/Overdub Graph - TOP USERS [Nodes].tsv", sep='\t')
 top_users = data[, c("id", "label", "indegree")]
@@ -82,6 +114,51 @@ top_users = merge(top_users, rank_followers, by = "id")
 top_users = top_users[order(-top_users$outdegree), ]
 write.csv2(top_users, file = "Overdub graph (outdegree).csv", row.names = F)
 
+#ALTERNATIVE E ELECTRONIC
+data = read.csv("CSV/Overdub graph macro genres - AlternativeElectronic - TOP USERS.tsv", sep='\t')
+top_users = data[, c("id", "label", "indegree")]
+top_users = merge(top_users, rank_followers, by = "id")
+top_users = top_users[order(-top_users$indegree), ]
+write.csv2(top_users, file = "Overdub graph ALTERNATIVE ELECTRONIC (indegree).csv", row.names = F)
+top_users = data[, c("id", "label", "outdegree")]
+top_users = merge(top_users, rank_followers, by = "id")
+top_users = top_users[order(-top_users$outdegree), ]
+write.csv2(top_users, file = "Overdub graph ALTERNATIVE ELECTRONIC (outdegree).csv", row.names = F)
+
+#HIP HOP E R&B
+data = read.csv("CSV/Overdub graph macro genres - HipHopRnB - TOP USERS.tsv", sep='\t')
+top_users = data[, c("id", "label", "indegree")]
+top_users = merge(top_users, rank_followers, by = "id")
+top_users = top_users[order(-top_users$indegree), ]
+write.csv2(top_users, file = "Overdub graph HIP HOP R&B (indegree).csv", row.names = F)
+top_users = data[, c("id", "label", "outdegree")]
+top_users = merge(top_users, rank_followers, by = "id")
+top_users = top_users[order(-top_users$outdegree), ]
+write.csv2(top_users, file = "Overdub graph HIP HOP R&B (outdegree).csv", row.names = F)
+
+#JAZZ E CLASSICAL
+data = read.csv("CSV/Overdub graph macro genres - JazzClassical - TOP USERS.tsv", sep='\t')
+top_users = data[, c("id", "label", "indegree")]
+top_users = merge(top_users, rank_followers, by = "id")
+top_users = top_users[order(-top_users$indegree), ]
+write.csv2(top_users, file = "Overdub graph JAZZ CLASSICAL (indegree).csv", row.names = F)
+top_users = data[, c("id", "label", "outdegree")]
+top_users = merge(top_users, rank_followers, by = "id")
+top_users = top_users[order(-top_users$outdegree), ]
+write.csv2(top_users, file = "Overdub graph JAZZ CLASSICAL (outdegree).csv", row.names = F)
+
+#ROCK E BLUES
+data = read.csv("CSV/Overdub graph macro genres - RockBlues - TOP USERS.tsv", sep='\t')
+top_users = data[, c("id", "label", "indegree")]
+top_users = merge(top_users, rank_followers, by = "id")
+top_users = top_users[order(-top_users$indegree), ]
+write.csv2(top_users, file = "Overdub graph ROCK BLUES (indegree).csv", row.names = F)
+top_users = data[, c("id", "label", "outdegree")]
+top_users = merge(top_users, rank_followers, by = "id")
+top_users = top_users[order(-top_users$outdegree), ]
+write.csv2(top_users, file = "Overdub graph ROCK BLUES (outdegree).csv", row.names = F)
+
+#########################################################################################
 #FOLLOW GRAPH
 data = read.csv("CSV/Follow Graph - TOP USERS [Nodes].tsv", sep='\t')
 top_users = data[, c("id", "label", "indegree")]
