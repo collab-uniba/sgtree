@@ -1,3 +1,5 @@
+library(data.tree)
+
 cliques <- function(dir, filename) {
   setwd(dir)
   data = read.csv(paste(dir, "CSV/", filename, sep=""), sep="\t")
@@ -11,7 +13,7 @@ cliques <- function(dir, filename) {
   
   for(i in 2:length(d)) {
     len = length(d[[i]])
-    if(len >= 3) {
+    if(len == 4) {  #cambiare il valore per avere le cricche di una dimensione
       cat(paste(d[[i]][[1]], "-> "))
       for(j in 2:len) {
         if(j != len) {
@@ -33,5 +35,6 @@ directory = "~/Dropbox (Personale)/Songtree/12. Cliques/"
 
 for(i in 1:length(filenames)) {
   cliques(directory, filenames[i])
+  cat("\n\n")
 }
 
