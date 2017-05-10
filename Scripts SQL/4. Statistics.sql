@@ -39,6 +39,14 @@ CREATE VIEW commenters_non_authors AS
   WHERE kind = 0 AND senderid != songs.memberId AND senderid NOT IN (SELECT DISTINCT memberId
                                                                      FROM songs);
 
+#commenting authors
+SELECT DISTINCT senderid
+FROM songtree_messages
+  INNER JOIN songs
+    ON songtree_messages.songid = songs.id
+WHERE kind = 0 AND senderid != songs.memberId AND senderid IN (SELECT DISTINCT memberid
+                                                               FROM songs);
+
 #da likers and reposters gli utenti che hanno scritto canzoni o hanno commentato
 SELECT *
 FROM likers_and_reposters
@@ -46,6 +54,15 @@ WHERE id NOT IN (SELECT DISTINCT memberId AS id
                  FROM songs
                  UNION SELECT id
                        FROM commenters_non_authors);
+
+#active users
+SELECT id
+FROM
+(SELECT id
+FROM likers_and_reposters
+UNION (SELECT id
+       FROM commenters_non_authors)) as t
+WHERE id NOT in (SELECT DISTINCT memberid FROM songs);
 
 #utenti che hanno commentato canzoni di altri
 SELECT count(DISTINCT senderid)
@@ -56,9 +73,9 @@ WHERE kind = 0 AND memberId != senderid;
 SELECT count(DISTINCT memberid)
 FROM songs
 WHERE memberId NOT IN (SELECT DISTINCT senderid
-                   FROM songs
-                     INNER JOIN songtree_messages ON songs.id = songtree_messages.songid
-                   WHERE kind = 0 AND senderid != songs.memberId);
+                       FROM songs
+                         INNER JOIN songtree_messages ON songs.id = songtree_messages.songid
+                       WHERE kind = 0 AND senderid != songs.memberId);
 
 #Coloro che hanno effettuato qualche attività nella comunity. Le attività comprendono: scrittura, invio di messaggi,
 #bookmark, ascolto di canzoni, repost, following, like, direct messages.
