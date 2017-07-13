@@ -31,3 +31,11 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+
+*.class
+
+overdub net/config/DBConnection.properties
+
+overdub net/.idea/workspace.xml
+
+*.tsv
